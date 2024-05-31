@@ -1,0 +1,267 @@
+[
+    {
+        "id": 210,
+        "display_id": 9,
+        "owner": 1080,
+        "name": "Amazing Gadget",
+        "category": "Electronics",
+        "characteristics": "High-tech features",
+        "features": "",
+        "brand": "Gadget Pro",
+        "sku": [
+            {
+                "id": 249,
+                "selling_price": 120,
+                "max_retail_price": 100,
+                "customer": 11909,
+                "customer_profile": {
+                    "id": 11909,
+                    "name": "Alice",
+                    "color": [255, 0, 0],
+                    "email": "alice@example.com",
+                    "pincode": "New York",
+                    "location_name": "New York, USA",
+                    "type": "B",
+                    "profile_pic": null,
+                    "gst": ""
+                },
+                "amount": 50,
+                "unit": "piece",
+                "quantity_in_inventory": 10,
+                "product": 210
+            },
+            {
+                "id": 250,
+                "selling_price": 115,
+                "max_retail_price": 95,
+                "amount": 45,
+                "unit": "piece",
+                "quantity_in_inventory": 20,
+                "product": 210
+            },
+            {
+                "id": 251,
+                "selling_price": 110,
+                "max_retail_price": 90,
+                "amount": 40,
+                "unit": "piece",
+                "quantity_in_inventory": 15,
+                "product": 210
+            }
+        ],
+        "updated_on": "2024-05-25T10:30:00.000Z",
+        "adding_date": "2024-05-25T10:00:00.000Z"
+    },
+    {
+        "id": 211,
+        "display_id": 10,
+        "owner": 1081,
+        "name": "Super Widget",
+        "category": "Tools",
+        "characteristics": "Durable and reliable",
+        "features": "",
+        "brand": "Widget Works",
+        "sku": [
+            {
+                "id": 252,
+                "selling_price": 75,
+                "max_retail_price": 70,
+                "customer": 11910,
+                "customer_profile": {
+                    "id": 11910,
+                    "name": "Bob",
+                    "color": [0, 255, 0],
+                    "email": "bob@example.com",
+                    "pincode": "Los Angeles",
+                    "location_name": "Los Angeles, USA",
+                    "type": "A",
+                    "profile_pic": null,
+                    "gst": ""
+                },
+                "amount": 30,
+                "unit": "unit",
+                "quantity_in_inventory": 5,
+                "product": 211
+            },
+            {
+                "id": 253,
+                "selling_price": 70,
+                "max_retail_price": 65,
+                "amount": 28,
+                "unit": "unit",
+                "quantity_in_inventory": 8,
+                "product": 211
+            },
+            {
+                "id": 254,
+                "selling_price": 65,
+                "max_retail_price": 60,
+                "amount": 25,
+                "unit": "unit",
+                "quantity_in_inventory": 12,
+                "product": 211
+            }
+        ],
+        "updated_on": "2024-05-26T11:45:00.000Z",
+        "adding_date": "2024-05-26T11:15:00.000Z"
+    },
+    {
+        "id": 212,
+        "display_id": 11,
+        "owner": 1082,
+        "name": "Ultimate Device",
+        "category": "Gadgets",
+        "characteristics": "Cutting-edge technology",
+        "features": "",
+        "brand": "Device Maker",
+        "sku": [
+            {
+                "id": 255,
+                "selling_price": 200,
+                "max_retail_price": 180,
+                "customer": 11911,
+                "customer_profile": {
+                    "id": 11911,
+                    "name": "Charlie",
+                    "color": [0, 0, 255],
+                    "email": "charlie@example.com",
+                    "pincode": "Chicago",
+                    "location_name": "Chicago, USA",
+                    "type": "C",
+                    "profile_pic": null,
+                    "gst": ""
+                },
+                "amount": 60,
+                "unit": "piece",
+                "quantity_in_inventory": 3,
+                "product": 212
+            },
+            {
+                "id": 256,
+                "selling_price": 195,
+                "max_retail_price": 175,
+                "amount": 55,
+                "unit": "piece",
+                "quantity_in_inventory": 6,
+                "product": 212
+            },
+            {
+                "id": 257,
+                "selling_price": 190,
+                "max_retail_price": 170,
+                "amount": 50,
+                "unit": "piece",
+                "quantity_in_inventory": 9,
+                "product": 212
+            }
+        ],
+        "updated_on": "2024-05-27T12:00:00.000Z",
+        "adding_date": "2024-05-27T11:30:00.000Z"
+    },
+    {
+        "id": 213,
+        "display_id": 12,
+        "owner": 1083,
+        "name": "Premium Appliance",
+        "category": "Home Appliances",
+        "characteristics": "Energy efficient",
+        "features": "",
+        "brand": "Appliance Co",
+        "sku": [
+            {
+                "id": 258,
+                "selling_price": 300,
+                "max_retail_price": 280,
+                "customer": 11912,
+                "customer_profile": {
+                    "id": 11912,
+                    "name": "Dana",
+                    "color": [255, 255, 0],
+                    "email": "dana@example.com",
+                    "pincode": "Houston",
+                    "location_name": "Houston, USA",
+                    "type": "B",
+                    "profile_pic": null,
+                    "gst": ""
+                },
+                "amount": 70,
+                "unit": "unit",
+                "quantity_in_inventory": 2,
+                "product": 213
+            },
+            {
+                "id": 259,
+                "selling_price": 295,
+                "max_retail_price": 275,
+                "amount": 65,
+                "unit": "unit",
+                "quantity_in_inventory": 4,
+                "product": 213
+            },
+            {
+                "id": 260,
+                "selling_price": 290,
+                "max_retail_price": 270,
+                "amount": 60,
+                "unit": "unit",
+                "quantity_in_inventory": 6,
+                "product": 213
+            }
+        ],
+        "updated_on": "2024-05-28T13:15:00.000Z",
+        "adding_date": "2024-05-28T12:45:00.000Z"
+    },
+    {
+        "id": 214,
+        "display_id": 13,
+        "owner": 1084,
+        "name": "Luxury Item",
+        "category": "Lifestyle",
+        "characteristics": "Exclusive and premium",
+        "features": "",
+        "brand": "Luxury Brand",
+        "sku": [
+            {
+                "id": 261,
+                "selling_price": 500,
+                "max_retail_price": 450,
+                "customer": 11913,
+                "customer_profile": {
+                    "id": 11913,
+                    "name": "Eve",
+                    "color": [128, 0, 128],
+                    "email": "eve@example.com",
+                    "pincode": "San Francisco",
+                    "location_name": "San Francisco, USA",
+                    "type": "A",
+                    "profile_pic": null,
+                    "gst": ""
+                },
+                "amount": 80,
+                "unit": "piece",
+                "quantity_in_inventory": 1,
+                "product": 214
+            },
+            {
+                "id": 262,
+                "selling_price": 490,
+                "max_retail_price": 440,
+                "amount": 75,
+                "unit": "piece",
+                "quantity_in_inventory": 3,
+                "product": 214
+            },
+            {
+                "id": 263,
+                "selling_price": 480,
+                "max_retail_price": 430,
+                "amount": 70,
+                "unit": "piece",
+                "quantity_in_inventory": 5,
+                "product": 214
+            }
+        ],
+        "updated_on": "2024-05-29T14:30:00.000Z",
+        "adding_date": "2024-05-29T14:00:00.000Z"
+    }
+]
