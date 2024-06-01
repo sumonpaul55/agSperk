@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Home from '../pages/home/Home'
 import { Link } from 'react-router-dom'
-
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { MultiSelectTheme } from 'chakra-multiselect'
+const theme = extendTheme({
+    components: {
+        MultiSelect: MultiSelectTheme
+    }
+})
 const Root = () => {
     const [themeDark, setThemeDark] = useState(false)
     const [toggle, setToggle] = useState(false)
@@ -34,23 +40,26 @@ const Root = () => {
     }
 
     return (
-        <div className={`${themeDark ? "dark" : "light"}`}>
-            <nav className='border-b dark:bg-slate-900 border-slate-700 dark:text-white'>
-                <div className="container mx-auto flex items-center justify-between">
-                    <h2 className='font-semibold text-xl dark:text-white'>AgSpert Technologies Private Limited</h2>
-                    <ul>
-                        <li className='py-2'>
-                            <Link to="/" className='font-semibold text-lg'>Home</Link>
-                        </li>
-                    </ul>
-                    {/* toggle theme */}
-                    <div className={`${toggle ? "bg-white" : "bg-black"} w-7 h-4 rounded-full relative cursor-pointer`} onClick={handleToggoleButton}>
-                        <div className={`absolute h-[90%] w-[50%] rounded-full duration-200 m-[1px] ${toggle ? "left-0 bg-black" : "right-0 bg-white"}`}></div>
+        <ChakraProvider theme={theme}>
+            <div className={`${themeDark ? "dark" : "light"}`}>
+                <nav className='border-b dark:bg-slate-900 border-slate-700 dark:text-white'>
+                    <div className="container mx-auto flex items-center justify-between">
+                        <h2 className='font-semibold text-xl dark:text-white'>AgSpert Technologies Private Limited</h2>
+                        <ul>
+                            <li className='py-2'>
+                                <Link to="/" className='font-semibold text-lg'>Home</Link>
+                            </li>
+                        </ul>
+                        {/* toggle theme */}
+                        <div className={`${toggle ? "bg-white" : "bg-black"} w-7 h-4 rounded-full relative cursor-pointer`} onClick={handleToggoleButton}>
+                            <div className={`absolute h-[90%] w-[50%] rounded-full duration-200 m-[1px] ${toggle ? "left-0 bg-black" : "right-0 bg-white"}`}></div>
+                        </div>
                     </div>
-                </div>
-            </nav >
-            <Home></Home>
-        </div >
+                </nav >
+                <Home></Home>
+            </div >
+        </ChakraProvider>
+
     )
 }
 

@@ -1,21 +1,47 @@
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverTrigger, Portal, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
 import { BiDotsHorizontal, BiEdit } from 'react-icons/bi'
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { FaEye } from 'react-icons/fa'
 import { RxAvatar } from 'react-icons/rx'
-
+import { useForm } from "react-hook-form"
+import AllProduct from './AllProduct';
 const Home = () => {
+
+    const [orderData, setOrderData] = useState([])
+    const [startDate, setStartDate] = useState(new Date());
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const { isPending, error, data } = useQuery({
+
+
+    const { isPending, data } = useQuery({
         queryKey: ['orders'],
         queryFn: () =>
             fetch('data.json').then((res) =>
                 res.json(),
             ),
     })
-    // console.log(data)
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm()
+
+    const onSubmit = (data) => {
+        data.date = startDate.toLocaleDateString().replaceAll(`/`, "-");
+
+        let newOrder = [...orderData]
+        if (data) {
+
+            newOrder.push(data)
+        }
+        setOrderData(newOrder)
+        reset()
+        onClose()
+    }
+
 
     if (isPending) {
         return <Spinner />
@@ -37,7 +63,6 @@ const Home = () => {
                                 </TabList>
                                 <button onClick={onOpen} className='text-lg font-semibold border p-2 rounded-md hover:bg-blue-600 hover:text-white'>+ Sale Order</button>
                             </div>
-
                             <TabPanels className='mt-4'>
                                 <TabPanel>
                                     <table className='w-full table-fixed'>
@@ -52,13 +77,13 @@ const Home = () => {
                                         </thead>
                                         <tbody>
                                             {
-                                                data?.map(items => (
+                                                data?.product.map(items => (
                                                     <tr key={items.sku[0].id} className='border border-t-0 border-black dark:border-white'>{console.log()}
-                                                        <td className='text-center text-base py-2'>{items.sku[0].id}</td>
-                                                        <td className='text-center text-base py-2 flex items-center gap-2'>{items.sku[0].customer_profile.profile_pic ? <img src={items.sku[0].customer_profile.profile_pic} alt="" /> : <RxAvatar className='text-xl text-indigo-600' />}{items.sku[0].customer_profile.name}</td>
-                                                        <td className='text-center text-base py-2'>{items.sku[0].selling_price}</td>
-                                                        <td className='text-center text-base py-2'>{items.updated_on.slice(0, 10)}</td>
-                                                        <td className='text-center py-2 text-xl'>
+                                                        <td className='font-semibold text-center text-base py-2'>{items.sku[0].id}</td>
+                                                        <td className='font-semibold text-center text-base py-2 flex items-center gap-2 justify-center'>{items.sku[0].customer_profile.profile_pic ? <img src={items.sku[0].customer_profile.profile_pic} alt="" /> : <RxAvatar className='text-xl text-indigo-600' />}{items.sku[0].customer_profile.name}</td>
+                                                        <td className='font-semibold text-center text-base py-2'>₹{items.sku[0].selling_price}</td>
+                                                        <td className='font-semibold text-center text-base py-2'>{items.updated_on.slice(0, 10)}</td>
+                                                        <td className='font-semibold text-center py-2 text-xl'>
                                                             <div>
                                                                 <Popover>
                                                                     <PopoverTrigger>
@@ -78,11 +103,64 @@ const Home = () => {
                                                     </tr>
                                                 ))
                                             }
+                                            {
+                                                orderData?.map(items => (
+                                                    <tr key={items} className='border border-t-0 border-black dark:border-white'>
+                                                        <td className='font-semibold text-center text-base py-2'>{items.id}</td>
+                                                        <td className='font-semibold text-center text-base py-2 flex items-center gap-2'>{items?.picture ? <img src={items.customer_profile.profile_pic} alt="" /> : <RxAvatar className='text-xl text-indigo-600' />} {items.name}</td>
+                                                        <td className='font-semibold text-center text-base py-2'>{items.price}</td>
+                                                        <td className='font-semibold text-center text-base py-2'>{items?.date}</td>
+                                                        <td className='font-semibold text-center py-2 text-xl'>
+                                                            <div>
+                                                                <Popover>
+                                                                    <PopoverTrigger>
+                                                                        <Button><BiDotsHorizontal></BiDotsHorizontal></Button>
+                                                                    </PopoverTrigger>
+                                                                    <Portal>
+                                                                        <PopoverContent>
+                                                                            <PopoverArrow />
+                                                                            {/* <PopoverCloseButton /> */}
+                                                                            <PopoverBody className='bg-slate-500 p-2 rounded-md space-x-3'>
+                                                                                <Button colorScheme='blue'><BiEdit className='text-white text-2xl hover:text-blue-300' /></Button>
+                                                                                <Button colorScheme='blue'><FaEye className='text-white text-2xl hover:text-blue-300' /></Button>
+                                                                            </PopoverBody>
+                                                                        </PopoverContent>
+                                                                    </Portal>
+                                                                </Popover></div>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
                                         </tbody>
                                     </table>
                                 </TabPanel>
                                 <TabPanel>
-                                    <p>two!</p>
+                                    <table className='w-full table-fixed'>
+                                        <thead>
+                                            <tr className='border border-black bg-slate-300 dark:bg-black dark:border-white'>
+                                                <th className='py-2 text-lg'>ID</th>
+                                                <th className='py-2 text-lg'>Quantity</th>
+                                                <th className='py-2 text-lg'>Price ₹</th>
+                                                <th className='py-2 text-lg'>Invoice Date</th>
+                                                <th className='py-2 text-lg'>Invoice No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                data?.salesOrder.map(items => (
+                                                    <tr key={items.customer_id} className='border border-t-0 border-black dark:border-white'>
+                                                        <td className='font-semibold text-center text-base py-2'>{items.customer_id}</td>
+                                                        <td className='font-semibold text-center text-base py-2 flex items-center gap-2 justify-center'>{items?.items[0].quantity}</td>
+                                                        <td className='font-semibold text-center text-base py-2'>₹ {items?.items[0].price}</td>
+                                                        <td className='font-semibold text-center text-base py-2'>{items?.invoice_date}</td>
+                                                        <td className='font-semibold text-center text-base py-2'>{items?.invoice_no}</td>
+                                                    </tr>
+                                                ))
+                                            }
+
+                                        </tbody>
+                                    </table>
+
                                 </TabPanel>
 
                             </TabPanels>
@@ -94,31 +172,36 @@ const Home = () => {
                     {/* modal form for create orders */}
                     <Modal isOpen={isOpen} onClose={onClose}>
                         {/* <ModalOverlay /> */}
-                        <ModalContent className="max-w-[600px] bg-slate-700 mx-auto md:mt-52 p-4 text-white">
+                        <ModalContent className="max-w-[600px] bg-slate-700 mx-auto p-4 text-white">
                             <ModalHeader className='font-bold text-lg'>Make a Sales Order</ModalHeader>
                             {/* <ModalCloseButton /> */}
                             <ModalBody>
-                                <form action="" className='mt-6 space-y-5'>
+                                <form onSubmit={handleSubmit(onSubmit)} className='mt-6 space-y-8'>
                                     <div className='flex gap-3 items-center'>
-                                        <div className='flex gap-1 flex-col flex-1'>
-                                            <label htmlFor="">Id</label>
-                                            <input type="text" placeholder='Enter Customer Name' className='border-0 outline-0 p-1 rounded text-black' />
+                                        <div className='flex gap-1 flex-col flex-1 relative'>
+                                            <label htmlFor="" className='font-semibold'>Id</label>
+                                            <input type='number' {...register("id", { required: true })} placeholder='Enter Customer Id' className='p-1 bg-slate-300 border-0 outline-0 rounded text-black' />
+                                            {errors.id && <p role="alert" className='text-red-400 absolute top-full'>Please Enter a vlid Id</p>}
                                         </div>
-                                        <div className='flex gap-1 flex-col flex-1'>
-                                            <label htmlFor="">Customer Name</label>
-                                            <input type="text" placeholder='Enter Customer Name' className='border-0 outline-0 p-1 rounded text-black' />
+                                        <div className='flex gap-1 flex-col flex-1 relative'>
+                                            <label htmlFor="" className='font-semibold'>Customer Name</label>
+                                            <input type="text"{...register("name", { required: true })} placeholder='Enter Customer Name' className='bg-slate-300 border-0 outline-0 p-1 rounded text-black' />
+                                            {errors.name && <p role="alert" className='text-red-400 absolute top-full'>Name Is required</p>}
                                         </div>
                                     </div>
                                     <div className='flex gap-3 items-center'>
-                                        <div className='flex gap-1 flex-col flex-1'>
-                                            <label htmlFor="">Price</label>
-                                            <input type="number" placeholder='Enter Customer Name' className='border-0 outline-0 p-1 rounded text-black' />
+                                        <div className='flex gap-1 flex-col flex-1 relative'>
+                                            <label htmlFor="" className='font-semibold'>Price</label>
+                                            <input type="number" {...register("price", { required: true })} placeholder='Enter Customer Name' className='bg-slate-300 border-0 outline-0 p-1 rounded text-black' />
+                                            {errors.name && <p role="alert" className='text-red-400 absolute top-full'>Please Enter Price (Number)</p>}
                                         </div>
                                         <div className='flex gap-1 flex-col flex-1'>
-                                            <label htmlFor="">Date</label>
-                                            <input type="date" placeholder='Enter Customer Name' className='border-0 outline-0 p-1 rounded text-black' />
+                                            <label htmlFor="" className='font-semibold'>Date</label>
+                                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='border-0 bg-slate-300 w-full outline-0 p-1 rounded text-black' />
+                                            {errors.date && <p role='alert' className='text-red-400 absolute top-full'>Please select date</p>}
                                         </div>
                                     </div>
+                                    <Button type='submit' className='bg-blue-500 text-white p-2 rounded hover:bg-blue-700'>Submit</Button>
                                 </form>
                             </ModalBody>
 
@@ -126,10 +209,18 @@ const Home = () => {
                                 <Button className='bg-blue-500 text-white p-2 rounded hover:bg-blue-700' onClick={onClose}>
                                     Close
                                 </Button>
-                                <Button className='bg-blue-500 text-white p-2 rounded hover:bg-blue-700'>Secondary Action</Button>
+
                             </ModalFooter>
                         </ModalContent>
                     </Modal>
+                </div>
+            </section>
+
+            {/* for product listing */}
+            <section className='dark:bg-slate-700 dark:text-white py-20'>
+                <div className="container mx-auto">
+                    <AllProduct data={data}></AllProduct>
+
                 </div>
             </section>
         </main >
