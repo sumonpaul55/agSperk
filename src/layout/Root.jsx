@@ -33,13 +33,11 @@ const Root = () => {
         }
     }
 
-
-
     return (
         <div className={`${themeDark ? "dark" : "light"}`}>
             <nav className='border-b dark:bg-slate-900 border-slate-700 dark:text-white'>
                 <div className="container mx-auto flex items-center justify-between">
-                    <h2 className='font-bold text-xl dark:text-white'>Logo</h2>
+                    <h2 className='font-semibold text-xl dark:text-white'>AgSpert Technologies Private Limited</h2>
                     <ul>
                         <li className='py-2'>
                             <Link to="/" className='font-semibold text-lg'>Home</Link>
