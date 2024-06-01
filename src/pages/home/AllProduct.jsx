@@ -37,7 +37,6 @@ const AllProduct = ({ data }) => {
                             data?.product.map((items, idx) => (
                                 <AccordionItem key={idx} className='p-2'>
                                     <h2 className='py-2 font-semibold text-lg px-2 border-b'>
-                                        Nicher ta
                                         <AccordionButton>
                                             <div className='flex items-center justify-between w-full'>
                                                 <Box as='span' flex='1' textAlign='left'>
